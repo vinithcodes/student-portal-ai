@@ -8,14 +8,17 @@ import User from "./User";
 import FloatingChat from "./FloatingChat";
 import Department from "./Department";
 import Subject from "./Subject";
+import DownloadResults from "./DownloadResults";
 
 function Dashboard() {
 
   const navigate = useNavigate();
 
-  const [activePage, setActivePage] = useState("dashboard");
+  const [activePage, setActivePage] =
+    useState("dashboard");
 
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] =
+    useState(false);
 
   const [user, setUser] = useState({
     username: "",
@@ -46,9 +49,11 @@ function Dashboard() {
 
   useEffect(() => {
 
-    const token = localStorage.getItem("token");
+    const token =
+      localStorage.getItem("token");
 
-    const savedRole = localStorage.getItem("role");
+    const savedRole =
+      localStorage.getItem("role");
 
     if (!token || token === "undefined") {
 
@@ -73,7 +78,8 @@ function Dashboard() {
         setUser({
           username: res.data.username,
           email: res.data.email,
-          role: res.data.role || savedRole,
+          role:
+            res.data.role || savedRole,
           profile_image:
             res.data.profile_image,
         });
@@ -117,6 +123,14 @@ function Dashboard() {
       case "subject":
 
         return <Subject />;
+
+      // =========================================
+      // DOWNLOAD RESULTS
+      // =========================================
+
+      case "download":
+
+        return <DownloadResults />;
 
       // =========================================
       // DASHBOARD
@@ -240,7 +254,8 @@ function Dashboard() {
         </svg>
       ),
 
-      active: activePage === "dashboard",
+      active:
+        activePage === "dashboard",
 
       action: () => {
 
@@ -293,7 +308,9 @@ function Dashboard() {
 
             action: () => {
 
-              setActivePage("department");
+              setActivePage(
+                "department"
+              );
 
               setSidebarOpen(false);
 
@@ -347,6 +364,60 @@ function Dashboard() {
       : []),
 
     // =========================================
+    // DOWNLOAD RESULTS
+    // =========================================
+
+    ...(user.role === "user"
+
+      ? [
+
+          {
+            label: "Download Results",
+
+            icon: (
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 3v12"
+                  strokeLinecap="round"
+                />
+
+                <path
+                  d="M7 10l5 5 5-5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+
+                <path
+                  d="M5 21h14"
+                  strokeLinecap="round"
+                />
+              </svg>
+            ),
+
+            active:
+              activePage === "download",
+
+            action: () => {
+
+              setActivePage("download");
+
+              setSidebarOpen(false);
+
+            },
+
+          },
+
+        ]
+
+      : []),
+
+    // =========================================
     // PROFILE
     // =========================================
 
@@ -387,7 +458,7 @@ function Dashboard() {
 
     <div className="flex min-h-screen bg-[#080810] relative overflow-hidden">
 
-      {/* BACKGROUND GLOW */}
+      {/* BACKGROUND */}
 
       <div className="pointer-events-none fixed top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-violet-600/10 blur-[100px]" />
 
@@ -406,9 +477,7 @@ function Dashboard() {
 
       )}
 
-      {/* =================================================== */}
       {/* SIDEBAR */}
-      {/* =================================================== */}
 
       <aside
         className={`
@@ -592,9 +661,7 @@ function Dashboard() {
 
       </aside>
 
-      {/* =================================================== */}
       {/* MAIN CONTENT */}
-      {/* =================================================== */}
 
       <div className="flex-1 flex flex-col min-w-0">
 
@@ -607,6 +674,7 @@ function Dashboard() {
             <h1 className="text-white font-extrabold text-lg">
 
               Welcome back,
+
               <span className="bg-gradient-to-r from-violet-400 to-emerald-400 bg-clip-text text-transparent ml-2">
 
                 {user.username || "User"}
