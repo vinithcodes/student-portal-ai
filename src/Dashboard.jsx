@@ -480,22 +480,33 @@ const [mobileChatOpen, setMobileChatOpen] = useState(false);
 
       {/* SIDEBAR */}
 
-      <aside
-        className={`
-          fixed md:relative z-30 md:z-auto
-          h-full md:h-auto
-          w-64 flex-shrink-0
-          bg-[#0e0e16]
-          border-r border-white/[0.06]
-          flex flex-col
-          transition-transform duration-300
-          ${
-            sidebarOpen
-              ? "translate-x-0"
-              : "-translate-x-full md:translate-x-0"
-          }
-        `}
-      >
+    <aside
+  className={`
+    fixed top-0 left-0
+    z-50
+    h-screen
+    w-64
+    bg-[#0e0e16]
+    border-r border-white/10
+    flex flex-col
+    transition-transform duration-300
+    ${
+      sidebarOpen
+        ? "translate-x-0"
+        : "-translate-x-full md:translate-x-0"
+    }
+    md:relative md:z-auto
+  `}
+>
+
+  <div className="md:hidden flex justify-end p-4">
+  <button
+    onClick={() => setSidebarOpen(false)}
+    className="text-white text-2xl"
+  >
+    ✕
+  </button>
+</div>
 
         {/* LOGO */}
 
@@ -598,7 +609,7 @@ const [mobileChatOpen, setMobileChatOpen] = useState(false);
 
         {/* NAVIGATION */}
 
-        <nav className="flex-1 px-4 py-5 space-y-1">
+        <nav className="flex-1 min-h-0 overflow-y-auto px-4 py-5 space-y-1">
 
           <p className="text-[10px] font-semibold tracking-widest uppercase text-white/25 px-2 mb-3">
 
@@ -645,20 +656,51 @@ const [mobileChatOpen, setMobileChatOpen] = useState(false);
 
         {/* LOGOUT */}
 
-        <div className="px-4 pb-6">
+       <div className="border-t border-white/[0.06] p-4 bg-[#0e0e16]">
 
-          <div className="h-px bg-white/[0.06] mb-4" />
+  <button
+    onClick={handleLogout}
+    className="
+      w-full
+      flex
+      items-center
+      justify-center
+      gap-2
+      px-4
+      py-3
+      rounded-xl
+      bg-red-500/10
+      border
+      border-red-500/20
+      text-red-400
+      font-semibold
+      hover:bg-red-500/20
+      transition-all
+    "
+  >
+    <svg
+      className="w-5 h-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M17 16l4-4m0 0l-4-4m4 4H9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M3 21h8a2 2 0 002-2V5a2 2 0 00-2-2H3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
 
-          <button
-            onClick={handleLogout}
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-red-400/80 hover:text-red-300 hover:bg-red-500/10 transition-all duration-150"
-          >
+    Logout
+  </button>
 
-            Logout
-
-          </button>
-
-        </div>
+</div>
 
       </aside>
 
@@ -668,26 +710,40 @@ const [mobileChatOpen, setMobileChatOpen] = useState(false);
 
         {/* TOPBAR */}
 
-        <header className="flex items-center justify-between px-6 py-4 bg-[#0e0e16]/80 backdrop-blur-sm border-b border-white/[0.06] sticky top-0 z-10">
+       <header className="flex items-center justify-between px-4 md:px-6 py-4 bg-[#0e0e16]/80 backdrop-blur-sm border-b border-white/[0.06] sticky top-0 z-40">
 
-          <div>
+  <div className="flex items-center gap-3">
 
-            <h1 className="text-white font-extrabold text-lg">
+    {/* Mobile Menu */}
+    <button
+      className="md:hidden text-white"
+      onClick={() => setSidebarOpen(true)}
+    >
+      <svg
+        className="w-7 h-7"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M4 6h16M4 12h16M4 18h16"
+        />
+      </svg>
+    </button>
 
-              Welcome back,
+    <h1 className="text-white font-extrabold text-lg">
+      Welcome back,
+      <span className="bg-gradient-to-r from-violet-400 to-emerald-400 bg-clip-text text-transparent ml-2">
+        {user.username || "User"}
+      </span>
+    </h1>
 
-              <span className="bg-gradient-to-r from-violet-400 to-emerald-400 bg-clip-text text-transparent ml-2">
+  </div>
 
-                {user.username || "User"}
-
-              </span>
-
-            </h1>
-
-          </div>
-          
-
-        </header>
+</header> 
 
         {/* CONTENT */}
 
@@ -697,7 +753,7 @@ const [mobileChatOpen, setMobileChatOpen] = useState(false);
 
             {/* LEFT */}
 
-            <div className="xl:col-span-2 overflow-auto">
+            <div className="xl:col-span-2">
 
               {renderContent()}
 

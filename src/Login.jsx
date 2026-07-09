@@ -60,6 +60,8 @@ function Login() {
 
       );
 
+      console.log("LOGIN RESPONSE =", res.data);
+
       // Clear only auth data
       localStorage.removeItem("token");
       localStorage.removeItem("refresh");
