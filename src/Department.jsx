@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import API_URL from "./api";
 
 function Department() {
 
@@ -27,7 +28,7 @@ function Department() {
     try {
 
       const res = await axios.get(
-        "http://127.0.0.1:8000/department/",
+        `${API_URL}/department/`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -106,7 +107,7 @@ console.log("EDIT ID =", editId);
       if (editId) {
 
         await axios.put(
-          `http://127.0.0.1:8000/department/${editId}/`,
+          `${API_URL}/department/${editId}/`,
           {
             name: name.trim(),
           },
@@ -130,7 +131,7 @@ console.log("EDIT ID =", editId);
       else {
 
         await axios.post(
-          "http://127.0.0.1:8000/department/",
+          `${API_URL}/department/`,
           {
             name: name.trim(),
           },
@@ -186,7 +187,7 @@ console.log("EDIT ID =", editId);
     try {
 
       await axios.delete(
-        `http://127.0.0.1:8000/department/${id}/delete/`,
+        `${API_URL}/department/${id}/delete/`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

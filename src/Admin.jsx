@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import API_URL from "./api";
 
 function Admin() {
 
@@ -42,7 +43,7 @@ function Admin() {
   const loadUsers = () => {
 
     axios.get(
-      "http://127.0.0.1:8000/users/",
+      `${API_URL}/users/`,
       {
         headers: {
           Authorization: `Bearer ${token}`
@@ -68,7 +69,7 @@ function Admin() {
   const fetchResults = () => {
 
     axios.get(
-      "http://127.0.0.1:8000/results/",
+      `${API_URL}/results/`,
       {
         headers: {
           Authorization: `Bearer ${token}`
@@ -104,7 +105,7 @@ function Admin() {
     }
 
     axios.get(
-      `http://127.0.0.1:8000/filtered-subjects/?department=${departmentId}&semester=${semester}`,
+  `${API_URL}/filtered-subjects/?department=${departmentId}&semester=${semester}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -273,7 +274,7 @@ function Admin() {
     const api = editId
 
       ? axios.put(
-          `http://127.0.0.1:8000/results/${editId}/`,
+         `${API_URL}/results/${editId}/`,
           payload,
           {
             headers: {
@@ -284,7 +285,7 @@ function Admin() {
         )
 
       : axios.post(
-          "http://127.0.0.1:8000/add-result/",
+          `${API_URL}/add-result/`,
           payload,
           {
             headers: {
@@ -343,7 +344,7 @@ function Admin() {
       return;
 
     axios.delete(
-      `http://127.0.0.1:8000/results/${id}/delete/`,
+      `${API_URL}/results/${id}/delete/`,
       {
         headers: {
           Authorization:

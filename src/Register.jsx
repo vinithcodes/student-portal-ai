@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import API_URL from "./api";
 
 function Register() {
 
@@ -30,25 +31,17 @@ function Register() {
   // LOAD DEPARTMENTS
   // ===================================================
 
-  useEffect(() => {
 
-    axios
-      .get(
-        "http://127.0.0.1:8000/department/"
-      )
-      .then((res) => {
 
-        setDepartments(res.data);
-
-      })
-      .catch((err) => {
-
-        console.log(err);
-
-      });
-
-  }, []);
-
+useEffect(() => {
+  axios.get(`${API_URL}/department/`)
+    .then((res) => {
+      setDepartments(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}, []);
   // ===================================================
   // HANDLE INPUT
   // ===================================================
@@ -177,9 +170,9 @@ function Register() {
       };
 
       await axios.post(
-        "http://127.0.0.1:8000/register/",
-        payload
-      );
+  `${API_URL}/register/`,
+  payload
+);
 
       alert(
         "Account created successfully 🔥"

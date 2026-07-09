@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import API_URL from "./api";
 
 import {
   PieChart,
@@ -52,7 +53,7 @@ function SuperAdmin() {
     // USERS
     axios
       .get(
-        "http://127.0.0.1:8000/users/",
+       `${API_URL}/users/`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -80,7 +81,7 @@ function SuperAdmin() {
     // RESULTS
     axios
       .get(
-        "http://127.0.0.1:8000/results/",
+        `${API_URL}/results/`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -124,7 +125,7 @@ function SuperAdmin() {
 
     axios
       .put(
-        `http://127.0.0.1:8000/users/${id}/role/`,
+        `${API_URL}/users/${id}/role/`,
         { role: newRole },
         {
           headers: {
@@ -173,7 +174,7 @@ function SuperAdmin() {
 
     axios
       .delete(
-        `http://127.0.0.1:8000/users/${id}/delete/`,
+        `${API_URL}/users/${id}/delete/`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

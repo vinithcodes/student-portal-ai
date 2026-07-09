@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import API_URL from "./api";
 
 function DownloadResults() {
 
@@ -10,13 +11,13 @@ function DownloadResults() {
   useEffect(() => {
 
     axios.get(
-      "http://127.0.0.1:8000/results/",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
+  `${API_URL}/results/`,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+)
 
     .then((res) => {
 

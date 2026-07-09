@@ -7,6 +7,7 @@ import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import API_URL from "./api";
 
 function Chatbot() {
 
@@ -30,7 +31,7 @@ function Chatbot() {
     const token = localStorage.getItem("token");
 
     const res = await axios.get(
-      "http://127.0.0.1:8000/get-chats/",
+      `${API_URL}/get-chats/`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -70,7 +71,7 @@ function Chatbot() {
       const token = localStorage.getItem("token");
 
       const res = await axios.post(
-        "http://127.0.0.1:8000/create-chat/",
+        `${API_URL}/create-chat/`,
         {},
         {
           headers: {
@@ -109,7 +110,7 @@ function Chatbot() {
       const token = localStorage.getItem("token");
 
       const res = await axios.get(
-        `http://127.0.0.1:8000/chat-messages/${chatId}/`,
+        `${API_URL}/chat-messages/${chatId}/`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -184,7 +185,7 @@ useEffect(() => {
     const token = localStorage.getItem("token");
 
     await axios.delete(
-      "http://127.0.0.1:8000/clear-chat/",
+      `${API_URL}/clear-chat/`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -223,7 +224,7 @@ const deleteChat = async (chatId) => {
     const token = localStorage.getItem("token");
 
     await axios.delete(
-      `http://127.0.0.1:8000/delete-chat/${chatId}/`,
+      `${API_URL}/delete-chat/${chatId}/`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -263,7 +264,7 @@ const renameChat = async (chatId) => {
     const token = localStorage.getItem("token");
 
     await axios.put(
-      `http://127.0.0.1:8000/rename-chat/${chatId}/`,
+      `${API_URL}/rename-chat/${chatId}/`,
       {
         title: newTitle,
       },
@@ -290,7 +291,7 @@ const deleteAllChats = async () => {
     const token = localStorage.getItem("token");
 
     await axios.delete(
-      "http://127.0.0.1:8000/delete-all-chats/",
+      `${API_URL}/delete-all-chats/`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -371,7 +372,7 @@ const deleteAllChats = async () => {
     if (!chatId) {
 
       const res = await axios.post(
-        "http://127.0.0.1:8000/create-chat/",
+        `${API_URL}/create-chat/`,
         {},
         {
           headers: {
@@ -390,7 +391,7 @@ const deleteAllChats = async () => {
 
 
     const res = await axios.post(
-      "http://127.0.0.1:8000/ai-chat/",
+      `${API_URL}/ai-chat/`,
       {
         message: currentMessage,
         session_id: chatId,

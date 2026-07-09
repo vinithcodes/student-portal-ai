@@ -9,7 +9,7 @@ import FloatingChat from "./FloatingChat";
 import Department from "./Department";
 import Subject from "./Subject";
 import DownloadResults from "./DownloadResults";
-
+import API_URL from "./api";
 function Dashboard() {
 
   const navigate = useNavigate();
@@ -19,6 +19,8 @@ function Dashboard() {
 
   const [sidebarOpen, setSidebarOpen] =
     useState(false);
+
+const [mobileChatOpen, setMobileChatOpen] = useState(false);
 
   const [user, setUser] = useState({
     username: "",
@@ -63,15 +65,14 @@ function Dashboard() {
 
     }
 
-    axios
-      .get(
-        "http://127.0.0.1:8000/profile/",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+    axios.get(
+  `${API_URL}/profile/`,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+)
 
       .then((res) => {
 
@@ -684,6 +685,7 @@ function Dashboard() {
             </h1>
 
           </div>
+          
 
         </header>
 
@@ -708,6 +710,70 @@ function Dashboard() {
               <FloatingChat />
 
             </div>
+            {/* MOBILE FLOATING CHAT BUTTON */}
+
+<button
+  onClick={() => setMobileChatOpen(true)}
+  className={`
+    xl:hidden
+    fixed
+    bottom-5
+    right-5
+    z-40
+    w-14
+    h-14
+    rounded-2xl
+    bg-gradient-to-br
+    from-violet-500
+    to-emerald-500
+    shadow-lg
+    shadow-violet-900/40
+    flex
+    items-center
+    justify-center
+    active:scale-95
+    transition-transform
+    duration-150
+    ${mobileChatOpen ? "hidden" : "flex"}
+  `}
+>
+  <svg
+    className="w-6 h-6 text-white"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+</button>
+
+{/* MOBILE CHAT */}
+
+{mobileChatOpen && (
+  <div className="xl:hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center">
+
+    <div className="relative w-full sm:w-[420px] h-[85vh] sm:h-[80vh] bg-[#0e0e16] rounded-t-2xl sm:rounded-2xl border border-white/[0.06] overflow-hidden">
+
+      <button
+        onClick={() => setMobileChatOpen(false)}
+        className="absolute top-3 right-3 z-10 w-8 h-8 rounded-lg bg-white/10 text-white"
+      >
+        ✕
+      </button>
+
+      <div className="h-full">
+        <FloatingChat />
+      </div>
+
+    </div>
+
+  </div>
+)}
 
           </div>
 

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import API_URL from "./api";
+
 
 function Profile() {
   const navigate = useNavigate();
@@ -32,7 +34,7 @@ function Profile() {
     }
 
     axios
-      .get("http://127.0.0.1:8000/profile/", {
+      .get(`${API_URL}/profile/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -101,7 +103,7 @@ function Profile() {
     }
 
     await axios.put(
-      "http://127.0.0.1:8000/profile/",
+      `${API_URL}/profile/`,
       formData,
       {
         headers: {
@@ -153,7 +155,7 @@ function Profile() {
 
     try {
       await axios.post(
-        "http://127.0.0.1:8000/change-password/",
+        `${API_URL}/change-password/`,
         {
           current_password: data.current_password,
           new_password: data.new_password,

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import API_URL from "./api";
 
 function Login() {
   const navigate = useNavigate();
@@ -51,10 +52,12 @@ function Login() {
         username: data.username.trim(),
         password: data.password,
       };
-
+      
+     
       const res = await axios.post(
-        "http://127.0.0.1:8000/login/",
-        payload
+      `${API_URL}/login/`,
+      payload
+
       );
 
       // Clear only auth data
