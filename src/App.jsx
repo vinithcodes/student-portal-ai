@@ -6,7 +6,7 @@ import Profile from "./Profile";
 import SuperAdmin from "./SuperAdmin";
 import Admin from "./Admin";
 import User from "./User";
-import Chatbot from "./Chatbot";
+import Chatbot from "./ChatBot";
 function App() {
   return (
     <Router>
@@ -18,7 +18,7 @@ function App() {
         <Route path="/superadmin-dashboard" element={<SuperAdmin />} />
         <Route path="/admin-dashboard" element={<Admin />} />
         <Route path="/user-dashboard" element={<User />} />
-        <Route path="/chatbot" element={<Chatbot />} />
+        <Route path="/chatBot" element={<ChatBot />} />
       </Routes>
     </Router>
   );
