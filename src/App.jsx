@@ -6,7 +6,7 @@ import Profile from "./Profile";
 import SuperAdmin from "./SuperAdmin";
 import Admin from "./Admin";
 import User from "./User";
-import Chatbot from "./ChatBot";
+import ChatBot from "./ChatBot";
 function App() {
   return (
     <Router>
